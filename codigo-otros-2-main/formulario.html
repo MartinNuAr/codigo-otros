@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Se elimina type y media por mal uso-->
+  <link rel="stylesheet" href="./styles.css">
+  <title>Formulario</title>
+</head>
+
+<body>
+  <h1>Bienvenidos a mi fiesta</h1>
+  <h2>Por favor, confirmar asistencia:</h2>
+
+  <!-- Se añaden labels para los campos del formulario y se eliminan los atributos 'name'
+  para evitar tener código sin uso-->
+  <form class="formulario">
+    <label for="name">Nombre</label>
+    <input type="text" id="name">
+    <br />
+
+    <label for="age">Edad</label>
+    <input type="number" id="age">
+    <br />
+    
+    <label for="nationality">Nacionalidad</label>
+    <select id="nationality">
+      <option value="ar">Argentina</option>
+      <option value="mx">Mexicana</option>
+      <option value="per">Peruana</option>
+      <option value="vnzl">Venezolana</option>
+    </select>
+    <br />
+    <!-- Se reemplaza el  -->
+    <input type="submit">
+  </form>
+
+  <!-- Se añade la clase de lista definida en los scripts -->
+  <div class="lista-de-invitados">
+    <h2>Lista de invitados</h2>
+
+  </div>
+
+  <!-- Se corrige la ruta de hoja de scripts -->
+  <script src="./formulario.js"></script>
+</body>
+
+</html>
