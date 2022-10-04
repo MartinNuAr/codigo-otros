@@ -7,6 +7,7 @@ traerlos del HTML */
 
 const nombre = document.getElementById('name');
 const blog = document.getElementById('blog');
+const address = document.getElementById('address')
 // Se borra location porque no se usará
 
 // Se unen las dos funciones en una sola
@@ -17,6 +18,7 @@ function displayUser(username) {
     nombre.innerHTML = data.name;
     blog.innerHTML = data.blog;
     blog.setAttribute("href", data.blog);
+    address.innerHTML = data.location;
     //
   }).catch(error => {
     console.log('OH NO');
