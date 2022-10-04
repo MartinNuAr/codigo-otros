@@ -1,62 +1,59 @@
 // Tenemos un li de productos
 
 const productos = [
-  {nombre: "Zapato negro", tipo: "zapato", color: "negro", img: "./taco-negro.jpg"},
-  {nombre: "Zapato azul", tipo: "zapato", color: "azul", img: "./taco-azul.jpg"},
-  {nombre: "Bota negra", tipo: "bota", color: "negro", img: "./bota-negra.jpg"},
-  {nombre: "Bota azul", tipo: "bota", color: "azul", img: "./bota-azul.jpg"},
-  {nombre: "Zapato rojo", tipo: "zapato", color: "rojo", img: "./zapato-rojo.jpg"}
+  // Se corrige la ruta de las imágnenes
+  {nombre: "Zapato negro", tipo: "zapato", color: "negro", img: "./src/taco-negro.jpg"},
+  {nombre: "Zapato azul", tipo: "zapato", color: "azul", img: "./src/taco-azul.jpg"},
+  {nombre: "Bota negra", tipo: "bota", color: "negro", img: "./src/bota-negra.jpg"},
+  {nombre: "Bota azul", tipo: "bota", color: "azul", img: "./src/bota-azul.jpg"},
+  {nombre: "Zapato rojo", tipo: "zapato", color: "rojo", img: "./src/zapato-rojo.jpg"}
 ]
 
-const li = document.getElementsByName("lista-de-productos")
-const $i = document.querySelector('.input');
+// Se renombran la variables para mejor comprensión
+// Se cambia también el Name por ID
+const lista = document.getElementById("lista-de-productos");
+// Se reemplaza el querySelector por getElement
+const inputSelect = document.getElementById("seleccion");
 
 for (let i = 0; i < productos.length; i++) {
-  var d = document.createElement("div")
-  d.classList.add("producto")
+  // Se renombra la variable 'd' a 'div' para mejor comprensión
+  var div = document.createElement("div")
+  div.classList.add("producto")
 
-  var ti = document.createElement("p")
-  ti.classList.add("titulo")
-  ti.textContent = productos[i].nombre
+  // Cambio de nombre de variable 'ti' a 'title'
+  var title = document.createElement("p")
+  title.classList.add("titulo")
+  title.textContent = productos[i].nombre
   
   var imagen = document.createElement("img");
   imagen.setAttribute('src', productos[i].img);
 
-  d.appendChild(ti)
-  d.appendChild(imagen)
+  // Se reemplaza el appendChild por append para más versatilidad 
+  div.append(title)
+  div.append(imagen)
 
-  li.appendChild(d)
+  lista.append(div)
 }
 
-displayProductos(productos)
-const botonDeFiltro = document.querySelector("button");
+const botonDeFiltro = document.getElementById("btnFiltro");
 
-botonDeFiltro.onclick = function() {
-  while (li.firstChild) {
-    li.removeChild(li.firstChild);
+// Se cambia el "onclick" por un event listener
+botonDeFiltro.addEventListener("click", function (event){
+  event.preventDefault();
+  while (lista.firstChild) {
+    lista.removeChild(lista.firstChild);
   }
 
-  const texto = $i.value;
-  console.log(texto);
-  const productosFiltrados = filtrado(productos, texto );
-
-  for (let i = 0; i < productosFiltrados.length; i++) {
-    var d = document.createElement("div")
-    d.classList.add("producto")
-  
-    var ti = document.createElement("p")
-    ti.classList.add("titulo")
-    ti.textContent = productosFiltrados[i].nombre
-    
-    var imagen = document.createElement("img");
-    imagen.setAttribute('src', productosFiltrados[i].img);
-  
-    d.appendChild(ti)
-    d.appendChild(imagen)
-  
-    li.appendChild(d)
-  }
-}
+  let texto = inputSelect.value;
+  let productosFiltrados = filtrado(productos, texto);
+  productosFiltrados.forEach(productoFiltrado =>{
+    // Se cambia el append por un innerHTML 
+    lista.innerHTML += (` <div class="producto">
+    <p class="titulo">${productoFiltrado.nombre}</p>
+    <img src="${productoFiltrado.img}" alt="">
+  </div>`);
+  })
+})
 
 const filtrado = (productos = [], texto) => {
   return productos.filter(item => item.tipo.includes(texto) || item.color.includes(texto));
